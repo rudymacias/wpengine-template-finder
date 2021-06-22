@@ -1,5 +1,5 @@
-# wpengine-template-finder
-WP Engine Template Finder for Marketing Team.
+# WP Engine Template Finder
+Template Finder feature for Marketing Team.
 
 **Contributors:** [rudymacias](https://github.com/rudymacias)  
 **Tags:** template, finder, wp engine, wpe, wpengine  

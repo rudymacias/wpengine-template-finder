@@ -162,8 +162,8 @@ class WPEngineTemplateFinder {
 		$this->loader->add_action( 'restrict_manage_posts', $plugin_admin, 'filter_pages_by_template', 10, 2 );
 		$this->loader->add_filter( 'parse_query', $plugin_admin, 'page_filter', 10, 2 );
 
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+		// $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
+		// $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
 	}
 
@@ -176,10 +176,10 @@ class WPEngineTemplateFinder {
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new WPEngineTemplateFinder_Public( $this->get_plugin_name(), $this->get_version() );
+		// $plugin_public = new WPEngineTemplateFinder_Public( $this->get_plugin_name(), $this->get_version() );
 
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+		// $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
+		// $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
 	}
 

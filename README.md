@@ -2,6 +2,7 @@
 WP Engine Template Finder for Marketing Team.
 
 === Plugin Name ===
+
 Contributors: rudymacias
 Link: https://www.creekdigital.co
 Tags: templates, finder

@@ -153,6 +153,14 @@ class WPEngineTemplateFinder {
 	private function define_admin_hooks() {
 
 		$plugin_admin = new WPEngineTemplateFinder_Admin( $this->get_plugin_name(), $this->get_version() );
+		
+		// Display Template to Pages
+		$this->loader->add_filter( 'manage_page_posts_columns', $plugin_admin, 'display_page_templates', 10, 2 );
+		$this->loader->add_action( 'manage_page_posts_custom_column', $plugin_admin, 'template_column', 10, 2 );
+		
+		// Filter Pages by Template
+		$this->loader->add_action( 'restrict_manage_posts', $plugin_admin, 'filter_pages_by_template', 10, 2 );
+		$this->loader->add_filter( 'parse_query', $plugin_admin, 'page_filter', 10, 2 );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );

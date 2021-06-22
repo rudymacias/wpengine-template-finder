@@ -3,7 +3,7 @@ WP Engine Template Finder for Marketing Team.
 
 === Plugin Name ===
 Contributors: rudymacias
-Donate link: https://www.creekdigital.co
+Link: https://www.creekdigital.co
 Tags: templates, finder
 Requires at least: 3.0.1
 Tested up to: 3.4

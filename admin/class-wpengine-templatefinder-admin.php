@@ -55,6 +55,83 @@ class WPEngineTemplateFinder_Admin {
 	}
 
 	/**
+	 * Display Page Templates
+	 *
+	 * @since    1.0.0
+	 */
+	public static function display_page_templates( $columns ) {
+		$columns['template'] = __( 'Template' );
+		return $columns;
+	}
+
+	/**
+	 * Template Column
+	 *
+	 * @since    1.0.0
+	 */
+	public static function template_column( $column, $post_id ) {
+		if ( $column === 'template' ) {
+			$current_template = get_post_meta( $post_id, '_wp_page_template', true );
+			$templates = wp_get_theme()->get_page_templates();
+			if ( !empty($templates[$current_template]) ) {
+				echo $templates[$current_template];
+			} else {
+				echo "Default";
+			}
+		}
+	}
+
+	/**
+	 * Filter Pages by Template
+	 *
+	 * @since    1.0.0
+	 */
+	public static function filter_pages_by_template( $column, $post_id ) {
+		$type = 'post';
+		if ( isset($_GET['post_type']) ) {
+			$type = $_GET['post_type'];
+		}
+		if ( $type == 'page' ) {
+			$templates = wp_get_theme()->get_page_templates();
+			?>
+
+			<select name="template_name">
+			<option value=""><?php echo __('All Templates'); ?></option>
+			<?php
+				$current_v = isset($_GET['template_name'])? $_GET['template_name']:'';
+				foreach ($templates as $value => $label) {
+					printf(
+							'<option value="%s"%s>%s</option>',
+							$value,
+							$value == $current_v? ' selected="selected"':'',
+							$label
+						);
+					}
+			?>
+			</select>
+
+			<?php
+		}
+	}
+
+	/**
+	 * Page Filter
+	 *
+	 * @since    1.0.0
+	 */
+	public static function page_filter( $query ) {
+		global $pagenow;
+		$type = 'page';
+		if ( isset($_GET['post_type']) ) {
+			$type = $_GET['post_type'];
+		}
+		if ( $type == 'page' && is_admin() && $pagenow=='edit.php' && isset($_GET['template_name']) && $_GET['template_name'] != '') {
+			$query->query_vars['meta_key'] = '_wp_page_template';
+			$query->query_vars['meta_value'] = $_GET['template_name'];
+		}
+	}
+
+	/**
 	 * Register the stylesheets for the admin area.
 	 *
 	 * @since    1.0.0
